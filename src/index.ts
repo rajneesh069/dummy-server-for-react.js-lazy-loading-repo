@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { TODOS } from "./Todo.js";
+import { TODOS } from "./utils/Todo.js";
+import { generateTodos, Todo } from "./utils/todoGenerator.js";
 
 const PORT = process.env.PORT || 8080;
 
@@ -23,12 +24,16 @@ app.get("/linkedin", async (_req: Request, res: Response) => {
 
 app.get("/todo", async (req: Request, res: Response) => {
   const { id } = req.query;
-
   res
     .json(TODOS.find((todo) => todo.id === parseInt(id as string)))
     .status(200);
 });
 
+app.get("/todos", async (_req: Request, res: Response) => {
+  const Todos: Todo[] = generateTodos();
+  res.json(Todos).status(200);
+});
+
 app.listen(PORT, () => {
-  console.log("Server is running at", PORT);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
