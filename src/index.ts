@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://custom-hooks-dun.vercel.app/"],
+    origin: ["http://localhost:5173", "https://custom-hooks-dun.vercel.app"],
     credentials: true,
   })
 );
